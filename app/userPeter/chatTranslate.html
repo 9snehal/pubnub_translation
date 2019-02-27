@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+  		<meta charset="UTF-8">
+  		<title>Multilingual Chat App - Peter</title>
+  		<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  		<link rel="stylesheet" href="css/chatstyles.css">
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+		<!--<script src="https://cdn.jsdelivr.net/npm/chat-engine@0.8.4/dist/chat-engine.min.js" type="text/javascript"></script>-->
+		<script src="https://cdn.jsdelivr.net/npm/chat-engine@0.9.5/dist/chat-engine.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+  	</head>
+
+	<body>
+
+
+		<div class="container clearfix">
+
+<!--user list  -->
+			<div class="people-list" id="people-list">
+            	<ul class="list">
+            	</ul>
+        	</div>
+
+<!-- header part -->
+					<div class="chat">
+        		<div class="chat-header clearfix">
+        			 <img src="img/chat.png" alt="avatar" />
+        			 <div class="chat-about">
+                    	<div class="chat-with">Chat with global buddies in your own language</div>
+                	</div>
+                	<div class="dropdown">
+                		<span style="font-size: 16px;">Choose Language  </span>
+  						<select name="Language" id="language" class="dropbtn" onchange = "languageSelect()">
+  							<option  value="en">English</option>
+   							<option value="es" >Spanish</option>
+    						<option value="de" >German</option>
+    						<option value="fr" >French</option>
+								<option value="zh" >Chinese</option>
+								<option value="it" >Italian</option>
+								<option value="ru" >Russian</option>
+						</select>
+					</div>
+        		</div>
+
+<!-- msg display screen -->
+ 				<div class="chat-history">
+                	<ul></ul>
+            	</div>
+
+<!-- input textbox and button -->
+        		<form id="sendMessage" class="chat-message clearfix">
+                	<input type="text" name="message-to-send" id="message-to-send" placeholder="Type your message" rows="1">
+
+                	</input>
+                	<input type="submit" value="Send"></input>
+            	</form>
+
+        	</div>
+
+        </div>
+
+
+
+<!-- input message sender those message we type -->
+        <script id="message-template" type="text/x-handlebars-template">
+	        <li class="clearfix">
+	            <div class="message-data align-right">
+	                <span class="message-data-time">{{time}}, Today</span>
+	                <span class="message-data-name">{{user.first}}</span> <i class="fa fa-circle me"></i>
+	            </div>
+	            <div class="message other-message float-right">
+	                {{messageOutput}}
+	            </div>
+	        </li>
+	    </script>
+
+<!-- output message  -->
+	    <script id="message-response-template" type="text/x-handlebars-template">
+	        <li>
+	            <div class="message-data">
+	                <span class="message-data-name"><i class="fa fa-circle online"></i> {{user.first}}</span>
+	                <span class="message-data-time">{{time}}, Today</span>
+	            </div>
+	            <div class="message my-message">
+	                {{messageOutput}}
+	            </div>
+	        </li>
+	    </script>
+
+<!-- to show user online -->
+	    <script id="person-template" type="text/x-handlebars-template">
+	        {{#if state.full}}
+	        <li class="clearfix" id="{{uuid}}">
+	            <img src="{{state.avatar}}" alt="avatar" />
+	            <div class="about">
+	                <div class="name">{{state.full}}</div>
+	                <div class="status">
+	                    <i class="fa fa-circle online"></i> online
+	                </div>
+	            </div>
+	        </li>
+	        {{/if}}
+	    </script>
+	</body>
+
+	<script src="scripts/chatTranslate.js"></script>
+
+</html>
